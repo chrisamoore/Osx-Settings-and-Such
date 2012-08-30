@@ -68,7 +68,7 @@ ZSH_THEME="afowler"
       else
         git blame $1
       fi
-      git tag -a $1 -m "$2"
+      git tag -a $1 -m $2
     }
   #list tags (brief)
    alias describe='git describe --tags'
