@@ -54,7 +54,94 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="afowler"
 
 # Example aliases
+# DIRS
+  alias htdocs='cd /Applications/MAMP/htdocs/'
+  alias etc='cd /etc/'
+  alias mamp_conf='cd /Applications/MAMP/conf/apache/'
 
+#git
+  #tagging Reference a Commit
+    function tag(){
+      if [ -z $1 ]
+      then
+        echo -e "\033[1;31mPlease specify a tag name and a message."
+      else
+        git blame $1
+      fi
+      git tag -a $1 -m "$2"
+    }
+  #list tags (brief)
+   alias describe='git describe --tags'
+  #list tag (bexpanded)
+    function show(){
+      if [ -z $1 ]
+      then
+        echo -e "\033[1;31mPlease specify a tag name."
+      else
+      git show $1
+      fi
+    }
+
+  #add tags to repo -> then sync
+   alias push_tags='git push --tags'
+
+  #stashing
+    #list Local Changes
+      alias stashes='git stash list'
+    #Save Local Changes
+     alias stash='git stash save "msg"'
+
+  #blame Who Did What when and where
+    function blame(){
+      if [ -z $1 ]
+      then
+        echo -e "\033[1;31mPlease Specify a file."
+      else
+        git blame $1
+      fi
+    }
+  #branching
+    #create new branch
+      function branch(){
+        if [ -z $1 ]
+        then
+          echo -e "\033[1;31mPlease specify a branch name."
+        else
+        git checkout -b $1
+        fi
+      }
+    #switch to branch
+      function checkout(){
+         if [ -z $1 ]
+          then
+            echo -e "\033[1;31mPlease specify a branch name."
+          else
+          git checkout $1
+          fi
+      }
+    #merge branch
+      function merge(){
+         if [ -z $1 ]
+        then
+          echo -e "\033[1;31mPlease specify a branch name."
+        else
+          git merge $1
+          fi
+        }
+
+  #committing
+    #Git pull w/o commit
+    alias no_commit='git pull --no-commit'
+
+    function commit(){
+       if [ -z $1 ]
+        then
+          echo -e "\033[1;31mPlease specify a branch name."
+        else
+        git commit -am "$1"
+        echo "Committed to [repoName]"
+        fi
+      }
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
