@@ -82,6 +82,17 @@ ZSH_THEME="afowler"
       fi
     }
 
+  #Remove tag (bexpanded)
+    function kill_tag(){
+      if [ -z $1 ]
+      then
+        echo -e "\033[1;31mPlease specify a tag name."
+      else
+      git tag $1 -d
+      git push origin :refs/tags/$1
+      fi
+    }
+
   #add tags to repo -> then sync
    alias push_tags='git push --tags'
 
@@ -126,8 +137,10 @@ ZSH_THEME="afowler"
           echo -e "\033[1;31mPlease specify a branch name."
         else
           git merge $1
+
           fi
         }
+
 
   #committing
     #Git pull w/o commit
@@ -142,7 +155,13 @@ ZSH_THEME="afowler"
         echo "Committed to [repoName]"
         fi
       }
-
+  #Statuses
+    alias status='git status'
+    #Git Log
+      function git_log(){
+        git log --oneline --graph --all --decorate
+      }
+      
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
